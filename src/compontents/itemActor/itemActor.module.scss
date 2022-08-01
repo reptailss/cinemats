@@ -1,0 +1,18 @@
+.card{
+  display: flex!important;
+  flex-direction: column!important;
+  justify-content: space-between!important;
+  height: 200px!important;
+  color: white!important;
+  padding: 10px!important;
+  background-color: rgba(255,255, 255, 0.1)!important;
+}
+
+.img{
+  height: 110px !important;
+}
+
+.typography{
+  font-size: 15px !important;
+  text-align: center !important;
+}
