@@ -1,4 +1,5 @@
 export interface IData {
     isLoading: boolean,
-    isError?: boolean
+    isError?: boolean,
+    status?: string
 }

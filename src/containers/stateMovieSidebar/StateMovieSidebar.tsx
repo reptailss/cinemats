@@ -1,10 +1,8 @@
-import * as React from 'react';
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {useLazyGetStateMovieQuery, useMakeFavoriteMutation,} from '../../services/MovieService'
-
-import {useAppDispatch, useAppSelector} from "../../hooks/hook";
-
-import {setMessage, setOpenSnack, setVariant} from '../../redux/slice/snackBarsSlice'
+import {useAppSelector} from "../../hooks/hook";
+import {useSnackBar} from "../../hooks/useSnackBars";
+import {AnimatePresence, motion} from "framer-motion";
 
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -12,10 +10,8 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-
 import styles from './stateMovieSidebar.module.scss'
-import {useSnackBar} from "../../hooks/useSnackBars";
-
+import React from "react";
 
 interface IMakeFavoriteProps {
     idMovie: number
@@ -25,11 +21,12 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
 
     const session_id = localStorage.getItem('session_id');
     const [makefavorite, {}] = useMakeFavoriteMutation();
-    const [getStateMovie, {data}] = useLazyGetStateMovieQuery();
+    const [getStateMovie, {data, status}] = useLazyGetStateMovieQuery();
     const {user} = useAppSelector(state => state.auth);
+    const {setSnackBar} = useSnackBar();
 
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -38,12 +35,11 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
         setAnchorEl(null);
     };
 
-
-    const dispatch = useAppDispatch();
+    console.log(status)
 
     const onRequestStateMovie = async () => {
         if (session_id) {
-            const {data, isLoading, isError, error} = await getStateMovie({
+            await getStateMovie({
                 params: {
                     session_id: session_id,
                     movie_id: idMovie
@@ -51,7 +47,6 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
             });
         }
     };
-
 
     const onMakeFavorite = async (e: React.MouseEvent<HTMLOrSVGElement>) => {
         e.preventDefault();
@@ -67,26 +62,41 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
                     id: user.id
                 }
             });
-            console.log('res')
         }
     };
 
     const onSnack = () => {
         if (data?.favorite) {
-            dispatch(setMessage('you removed from favorites!'));
-            dispatch(setVariant('info'));
-            dispatch(setOpenSnack(true));
+            setSnackBar('you removed from favorites!', 'info');
         } else {
-            dispatch(setMessage('you have successfully added to favorites!'))
-            dispatch(setVariant('success'));
-            dispatch(setOpenSnack(true));
+            setSnackBar('you have successfully added to favorites!', 'success');
         }
-
 
     };
 
     const colorFavoriteIcon = data?.favorite ? 'primary' : 'disabled';
     const textFavorite = data?.favorite ? 'remove from favorites' : 'add to favorite';
+
+    const favoriteButton = status === 'fulfilled' ?
+
+        <AnimatePresence>
+            <motion.div
+                key={idMovie}
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                exit={{opacity: 0}}
+                transition={{
+                    type: 'Tween',
+                    opacity: {duration: 0.7},
+                }}
+                className={styles.item}>
+                {textFavorite}
+                <FavoriteBorderIcon
+                    className={styles.button}
+                    fontSize={'small'}
+                    color={colorFavoriteIcon}/>
+            </motion.div>
+        </AnimatePresence> : null;
 
     useEffect(() => {
         if (open) {
@@ -94,10 +104,8 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
         }
     }, [open]);
 
-
     return (
         <>
-
             <Button
                 id="basic-button"
                 aria-controls={open ? 'basic-menuUser' : undefined}
@@ -112,6 +120,7 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
                 />
             </Button>
             <Menu
+                transitionDuration={700}
                 id="basic-menu"
                 anchorEl={anchorEl}
                 open={open}
@@ -125,19 +134,8 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
                     onMakeFavorite(e);
                     onSnack();
                 }}>
-                    <div className={styles.item}>
-                        {textFavorite}
-                        <FavoriteBorderIcon
-                            className={styles.button}
-                            fontSize={'small'}
-                            color={colorFavoriteIcon}/>
-                    </div>
-
+                    {favoriteButton}
                 </MenuItem>
-
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-
             </Menu>
         </>
     );

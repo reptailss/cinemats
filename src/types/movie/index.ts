@@ -15,6 +15,7 @@ export interface IMovie {
     spoken_languages?: string,
     original_language?: string,
     genres: IGenre[]
+    minHeightImg?: number
 
 }
 

@@ -4,6 +4,8 @@ import {useAppSelector} from "../../hooks/hook";
 import ListMovie from "../../compontents/listMovie/ListMovie";
 import styles from './favorite.module.scss'
 import {Link} from "react-router-dom";
+import NotAuth from "../../compontents/notAuth/NotAuth";
+
 
 
 const Favorite: FC = () => {
@@ -13,7 +15,9 @@ const Favorite: FC = () => {
     const {data, isLoading, isError} = useGetFavoriteQuery({
         params: {
             id: user?.id,
-            session_id: session_id
+            session_id: session_id,
+            page: 1,
+            sort:'created_at.desc',
         }
     }, {skip: !session_id || !auth});
 
@@ -25,12 +29,7 @@ const Favorite: FC = () => {
                 data={data.results}
                 isError={isError}
                 isLoading={isLoading}/> :
-            <div className={styles.noAuth}>
-                <Link className={styles.signin} to='/signIn'>
-                    Sign In
-                </Link>
-                to display the favorites bar
-            </div>;
+            <NotAuth text={'to display the favorites bar'}/>;
 
     const linkAll = auth && data?.results.length ? <Link className={styles.link} to={'/favorite'}>
         <span> See all</span>

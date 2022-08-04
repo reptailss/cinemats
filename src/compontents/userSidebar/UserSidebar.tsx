@@ -47,6 +47,7 @@ const UserSidebar = () => {
                             <img className={styles.img} src={plugAvatar} alt=""/>
                         </div>
                         <Menu
+                            transitionDuration={1000}
                             id="basic-menu"
                             anchorEl={anchorEl}
                             open={open}
@@ -57,7 +58,7 @@ const UserSidebar = () => {
                         >
                             <div onClick={handleClose} className={styles.username}>{user?.username}</div>
                             <MenuItem onClick={handleClose}>
-                                <Link to={'favorite'}>
+                                <Link className={styles.link} to={'favorite'}>
                                     <ListItemIcon>
                                         <FavoriteBorderIcon fontSize="small"/>
                                     </ListItemIcon>

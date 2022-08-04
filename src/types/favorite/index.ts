@@ -18,5 +18,7 @@ export interface IParamFavorite {
     params: {
         session_id: string | null,
         id: number,
+        page?: number,
+        sort: string
     }
 }
