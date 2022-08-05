@@ -1,0 +1,64 @@
+.root {
+  display: flex;
+  min-height: 100px;
+
+  color: white!important;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+
+  margin: 5px 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+
+
+  @media (max-width: 700px) {
+    margin: 0 auto;
+  }
+}
+
+
+
+.images {
+  height: 100%;
+  cursor: pointer;
+  transition: all .3s;
+  border-radius: 10px;
+
+}
+
+.box{
+  //padding: 3px 0!important;
+  padding: 15px 0;
+}
+.title{
+  font-size: 15px;
+  padding-left: 15px;
+}
+.rating{
+  font-size: .75rem;
+}
+.link{
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.row{
+
+  @media (min-width: 700px) {
+    width: 100%!important;
+  }
+}
+
+.over{
+  margin-top: 10px;
+  padding: 0 1rem;
+}
+.sidebar{
+  position: absolute;
+  right: 10px;
+  top: 10px
+}

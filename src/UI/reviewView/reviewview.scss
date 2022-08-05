@@ -1,0 +1,27 @@
+.review{
+
+  &__item{
+    display: flex;
+
+  }
+
+  &__inner{
+    display: flex;
+    align-items: center;
+  }
+  &__name{
+    margin-right: 15px;
+  }
+  &__avatar{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    object-position: center;
+    margin-right: 30px!important;
+  }
+  &__time{
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+}

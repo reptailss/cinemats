@@ -1,0 +1,35 @@
+.css-hyxlzm {
+  color: #ffffff;
+
+
+}
+
+.Mui-checked .css-hyxlzm {
+  color: #1976d2;
+}
+
+.form-control{
+  &__inner{
+    display: flex!important;
+    flex-direction: row!important;
+    align-items: center;
+
+
+  }
+  &__label{
+    margin-right: 30px;
+    font-size: 1.3rem!important;
+    padding-left: 30px!important;
+  }
+}
+
+.radio__item{
+  & span{
+    font-size: 12px!important;
+  }
+
+}
+
+.radio__title{
+  font-size: 15px!important;
+}

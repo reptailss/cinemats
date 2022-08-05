@@ -1,0 +1,31 @@
+.swiper-button-prev {
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' %3F%3E%3Csvg stroke='black' fill='white' data-name='Livello 1' id='Livello_1' viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Ctitle/%3E%3Cpath d='M64,0a64,64,0,1,0,64,64A64.07,64.07,0,0,0,64,0Zm0,122a58,58,0,1,1,58-58A58.07,58.07,0,0,1,64,122Z'/%3E%3Cpath d='M74.12,35.88a3,3,0,0,0-4.24,0l-26,26a3,3,0,0,0,0,4.24l26,26a3,3,0,0,0,4.24-4.24L50.24,64,74.12,40.12A3,3,0,0,0,74.12,35.88Z'/%3E%3C/svg%3E");
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: #000000;
+}
+
+.swiper-button-next {
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' %3F%3E%3Csvg stroke='black' fill='white' data-name='Livello 1' id='Livello_1' viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Ctitle/%3E%3Cpath d='M64,0a64,64,0,1,0,64,64A64.07,64.07,0,0,0,64,0Zm0,122a58,58,0,1,1,58-58A58.07,58.07,0,0,1,64,122Z'/%3E%3Cpath d='M58.12,35.88a3,3,0,0,0-4.24,4.24L77.76,64,53.88,87.88a3,3,0,1,0,4.24,4.24l26-26a3,3,0,0,0,0-4.24Z'/%3E%3C/svg%3E");
+  background-color: #000000;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+  bottom: 0;
+}
+
+
+.swiper-horizontal > .swiper-scrollbar {
+  background-color: rgba(255, 255, 255, .5)!important;
+}
+
+.swiper-scrollbar-drag {
+  background-color: #1976d2!important;
+}
+
