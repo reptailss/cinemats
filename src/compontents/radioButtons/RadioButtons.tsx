@@ -57,6 +57,7 @@ const RadioButtons: FC<IRadioButtons> = memo(
                     },
                 }}>{title}</FormLabel>
                 <RadioGroup
+                    className={'group'}
                     sx={{
                         color: '#ffffff',
                         '&.Mui-checked': {

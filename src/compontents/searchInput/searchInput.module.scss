@@ -48,12 +48,16 @@
   transform: translateY(-50%)!important;
   color: #ffffff!important;
   transition: all .3s;
+
   @media (max-width: 500px) {
-    position: relative!important;
-    transform: translate(0)!important;
-    padding: 0!important;
-    top:auto!important;
-    right: auto!important;
+    .searchMedia &{
+      position: relative!important;
+      transform: translate(0)!important;
+      padding: 0!important;
+      top:auto!important;
+      right: auto!important;
+    }
+
   }
   &:hover{
     cursor: pointer;

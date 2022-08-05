@@ -20,16 +20,32 @@
     margin-right: 30px;
     font-size: 1.3rem!important;
     padding-left: 30px!important;
+    @media (max-width: 500px) {
+      padding-left: 5px!important;
+      margin-right: 5px!important;
+    }
+
   }
 }
 
 .radio__item{
+  @media (max-width: 500px) {
+    margin-right: 5px!important;
+  }
   & span{
     font-size: 12px!important;
+
   }
 
 }
 
 .radio__title{
   font-size: 15px!important;
+}
+
+.group{
+  @media (max-width: 500px) {
+    justify-content: end!important;
+  }
+
 }
