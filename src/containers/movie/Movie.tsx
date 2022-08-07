@@ -9,8 +9,7 @@ import {motion} from "framer-motion";
 const Movie: FC = memo(() => {
         const {movieId} = useParams();
 
-        const {data, isLoading,status} = useGetMovieQuery(Number(movieId));
-        console.log(isLoading);
+        const {data,status} = useGetMovieQuery(Number(movieId));
 
         const content = status === 'pending' ? <SkeletonMovie height={382}/> : data ? <MovieView {...data}/> : null;
 

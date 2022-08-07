@@ -128,3 +128,19 @@ export const TrailerBreakpoints = {
         slidesPerView: 3,
     },
 };
+
+export const videoMovieBreakpoints = {
+    50: {
+        slidesPerView: 1,
+    },
+
+    400: {
+        slidesPerView: 2,
+    },
+
+    1200: {
+
+        slidesPerView: 4,
+    },
+};
+

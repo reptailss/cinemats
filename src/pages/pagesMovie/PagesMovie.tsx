@@ -9,6 +9,7 @@ import Movie from "../../containers/movie/Movie";
 import Accor from '../../compontents/accor/Accor'
 import styles from './pagesMovie.module.scss'
 import {FC, memo} from "react";
+import VideoMovie from "../../containers/videoMovie/VideoMovie";
 
 
 const PagesMovie:FC = memo(() => {
@@ -25,18 +26,15 @@ const PagesMovie:FC = memo(() => {
                         <Col className={styles.marginTop70} xl={3}>
                             <SidebarMovie movieId={movieId}/>
                         </Col>
-                        {/*<Col className={styles.marginTop}  xl={9}>*/}
-                        {/*<VideoMovie movieId={movieId}/>*/}
-                        {/*</Col>*/}
+                        <Col className={styles.marginTop}  xl={9}>
+                        <VideoMovie id={movieId}/>
+                        </Col>
                         <Col className={styles.marginTop} xl={9}>
                             <Accor expanded title={'Reviews'}>
                                 <Review movieId={movieId}/>
                             </Accor>
                         </Col>
                         <Col className={styles.marginTop} xl={9}>
-                            <div className={styles.similar}>
-                                Similar Movie
-                            </div>
                             <SimilarMovie breakpointsProp={moviePageSimilarBreakpoints} />
                         </Col>
                     </Row>

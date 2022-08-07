@@ -12,12 +12,13 @@ import style from './trailerItem.module.scss'
 
 
 interface ITrailerItemProps {
-    index: number,
+    index?: number,
     id: number,
+    full?: boolean
 
 }
 
-const TrailerItem: FC<ITrailerItemProps> = memo(({index, id}) => {
+const TrailerItem: FC<ITrailerItemProps> = memo(({index, id, full}) => {
 
     const {data} = useGetVideoMovieQuery(id);
 
@@ -31,7 +32,7 @@ const TrailerItem: FC<ITrailerItemProps> = memo(({index, id}) => {
 
     }, [id, data]);
 
-    const srcImg = `https://i.ytimg.com/vi/${trailer?.key ? trailer.key : 'HhIl_XJ-OGA'}/hqdefault.jpg`
+    const srcImg = `https://i.ytimg.com/vi/${trailer?.key ? trailer.key : 'HhIl_XJ-OGA'}/hqdefault.jpg`;
     const img = id ? <img className={style.img} src={srcImg} alt=""/> : null;
     const video = play ? <YouTube
         videoId={trailer?.key}
@@ -40,6 +41,7 @@ const TrailerItem: FC<ITrailerItemProps> = memo(({index, id}) => {
     const onOpen = (open: boolean) => {
         setPlay(open)
     };
+
 
     return (
         <>

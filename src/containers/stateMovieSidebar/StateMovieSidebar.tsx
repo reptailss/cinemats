@@ -35,7 +35,6 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
         setAnchorEl(null);
     };
 
-    console.log(status)
 
     const onRequestStateMovie = async () => {
         if (session_id) {

@@ -16,9 +16,8 @@ interface IListSearchProps extends IData{
 const ListSearch: FC<IListSearchProps> = ({data,lenghtOverview,isLoading,isError,status}) => {
 
 
-    console.log(isLoading);
 
-    const itemsMovie = data.map((item, i) => {
+    const itemsMovie = data?.map((item, i) => {
         if (i > 5) {
             return
         }
