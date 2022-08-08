@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useLazyGetStateMovieQuery, useMakeFavoriteMutation,} from '../../services/MovieService'
 import {useAppSelector} from "../../hooks/hook";
 import {useSnackBar} from "../../hooks/useSnackBars";
@@ -11,7 +11,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import styles from './stateMovieSidebar.module.scss'
-import React from "react";
+import RatingSidebar from "../ratingSidebar/RatingSidebar";
 
 interface IMakeFavoriteProps {
     idMovie: number
@@ -46,6 +46,8 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
             });
         }
     };
+
+    console.log(data);
 
     const onMakeFavorite = async (e: React.MouseEvent<HTMLOrSVGElement>) => {
         e.preventDefault();
@@ -97,6 +99,25 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
             </motion.div>
         </AnimatePresence> : null;
 
+
+    const rating = data && status === 'fulfilled' ?
+
+        <AnimatePresence>
+            <motion.div
+                key={idMovie+1}
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                exit={{opacity: 0}}
+                transition={{
+                    type: 'Tween',
+                    opacity: {duration: 0.7},
+                }}
+                >
+                <RatingSidebar valueRating={data?.rated} movieId={idMovie}/>
+            </motion.div>
+        </AnimatePresence> : null;
+
+
     useEffect(() => {
         if (open) {
             onRequestStateMovie();
@@ -134,6 +155,11 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
                     onSnack();
                 }}>
                     {favoriteButton}
+                </MenuItem>
+                <MenuItem onClick={(e) => {
+                    handleClose();
+                }}>
+                    {rating}
                 </MenuItem>
             </Menu>
         </>

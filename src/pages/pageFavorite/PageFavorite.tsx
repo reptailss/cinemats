@@ -35,7 +35,7 @@ const PageFavorite: FC = () => {
         }
     }, [data]);
 
-    console.log(status);
+
 
     const content = auth && !data?.results.length ?
         <div className={styles.text}>you have not added movies to your favorites yet...</div> : auth && data ?

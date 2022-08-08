@@ -12,7 +12,7 @@ const MovieInfo: FC = memo(() => {
 
     const {data, status} = useGetMovieQuery(movieId);
 
-    const content =  status === 'pending' ? <SkeletonMovie height={382}/> : data && status === 'fulfilled' ?
+    const content =  status === 'pending' ? <SkeletonMovie height={420}/> : data && status === 'fulfilled' ?
         <MovieInfoView {...data}/> : null;
 
     return (

@@ -8,14 +8,17 @@ import SimilarMovie from "../../containers/similarMovie/SimilarMovie"
 import Movie from "../../containers/movie/Movie";
 import Accor from '../../compontents/accor/Accor'
 import styles from './pagesMovie.module.scss'
-import {FC, memo} from "react";
+import {FC, memo, useEffect} from "react";
 import VideoMovie from "../../containers/videoMovie/VideoMovie";
 
 
-const PagesMovie:FC = memo(() => {
+const PagesMovie: FC = memo(() => {
     const {movieId: id} = useParams();
     const movieId = Number(id);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [movieId]);
     return (
         <>
             <div className={styles.root}>
@@ -26,8 +29,8 @@ const PagesMovie:FC = memo(() => {
                         <Col className={styles.marginTop70} xl={3}>
                             <SidebarMovie movieId={movieId}/>
                         </Col>
-                        <Col className={styles.marginTop}  xl={9}>
-                        <VideoMovie id={movieId}/>
+                        <Col className={styles.marginTop} xl={9}>
+                            <VideoMovie id={movieId}/>
                         </Col>
                         <Col className={styles.marginTop} xl={9}>
                             <Accor expanded title={'Reviews'}>
@@ -35,7 +38,9 @@ const PagesMovie:FC = memo(() => {
                             </Accor>
                         </Col>
                         <Col className={styles.marginTop} xl={9}>
-                            <SimilarMovie breakpointsProp={moviePageSimilarBreakpoints} />
+                            <SimilarMovie
+                                movieId={movieId}
+                                breakpointsProp={moviePageSimilarBreakpoints}/>
                         </Col>
                     </Row>
                 </Container>

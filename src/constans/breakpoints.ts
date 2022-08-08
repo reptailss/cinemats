@@ -144,3 +144,26 @@ export const videoMovieBreakpoints = {
     },
 };
 
+
+
+export const theaterBreakpoints = {
+    50: {
+        slidesPerView: 2,
+    },
+
+    400: {
+        slidesPerView: 3,
+    },
+    600: {
+
+        slidesPerView: 5,
+    },
+    900: {
+
+        slidesPerView: 3,
+    },
+    1200: {
+
+        slidesPerView: 3,
+    },
+};

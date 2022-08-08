@@ -12,34 +12,43 @@ import TrailerMovie from "../../containers/trailerMovie/TrailerMovie";
 import MovieInfo from "../../containers/movieInfo/MovieInfo";
 import {FC, memo} from "react";
 import Favorite from "../../containers/favorite/Favorite";
+import {useAppSelector} from "../../hooks/hook";
+import MovieTheater from "../../containers/movieTheater/MovieTheater";
 
 
 const Home: FC = memo(() => {
+    const {movieId} = useAppSelector(state => state.movie);
 
 
     return (
         <>
-            <Container className={style.container}>
+            <Container>
                 <Row>
                     <Col xl={12}>
                         <TrendingMovie/>
                     </Col>
                 </Row>
                 <div className={style.movieRandom}>
-                    <Row className={style.movieRandomRow}>
+                    <Row>
                         <Col xl={12}>
                             <div className={style.title}>
                                 Simple navigation
                             </div>
                         </Col>
-                        <Col xl={5}>
-                            <Favorite/>
-                        </Col>
-                        <Col className={style.popularMovie} xl={7}>
+
+                        <Col xl={7}>
                             <MovieInfo/>
                             <div className={style.similar}>
-                                <SimilarMovie breakpointsProp={similarBreakpoints}/>
+                                <SimilarMovie
+                                    movieId={movieId}
+                                    breakpointsProp={similarBreakpoints}
+                                />
                             </div>
+                        </Col>
+                        <Col xl={5}>
+                            <MovieTheater/>
+                            <Favorite/>
+
                         </Col>
                         <Col xl={12}>
                             <TrailerMovie/>

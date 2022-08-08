@@ -33,8 +33,28 @@ const ItemMovie: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vo
     };
     const imgMovie = poster_path ? pathImg(poster_path) : backdrop_path ? pathImg(backdrop_path) : PlugImg;
     const titleMovie = title ? sliceString(title) : name ? sliceString(name) : 'нет имени';
-
     const {auth} = useAppSelector(state => state.auth);
+
+
+
+    const imgBlock = !params.pathname.includes(`/movie`) ?
+        <Tooltip arrow placement="top" title="more">
+            <CardMedia
+                onClick={() => {onChangeMovieId(id)}}
+                style={{minHeight: minHeightImg}}
+                component="img"
+                className={styles.images}
+                image={imgMovie}
+                alt={titleMovie}/>
+        </Tooltip>
+        : <CardMedia
+                style={{minHeight: minHeightImg}}
+                component="img"
+                className={styles.images}
+                image={imgMovie}
+                alt={titleMovie}/>;
+
+
     return (
         <AnimatePresence>
             <motion.div
@@ -52,17 +72,7 @@ const ItemMovie: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vo
             >
                 <Card
                     className={styles.root}>
-                    <Tooltip arrow placement="top" title="more">
-                        <CardMedia
-                            onClick={() => {
-                                onChangeMovieId(id)
-                            }}
-                            style={{minHeight: minHeightImg}}
-                            component="img"
-                            className={styles.images}
-                            image={imgMovie}
-                            alt={titleMovie}/>
-                    </Tooltip>
+                    {imgBlock}
                     <Link style={{textDecorationLine: 'none'}} to={pathLink}>
                         <Button
                             className={styles.button}

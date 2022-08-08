@@ -22,10 +22,10 @@ import {
     IBodyValidateToken
 } from "../types/auth";
 
-import {IDataMakeFavorite,
-    IBodyMakeFavorite,IPropsMakeFavorite} from "../types/makeFavorite";
+import {IDataMakeFavorite,IPropsMakeFavorite} from "../types/makeFavorite";
 
 import {IDataStateMovie,IPropsStateMovie} from '../types/stateMovie'
+import {IDataMakeRating,IPropsMakeRating} from '../types/rating'
 
 export const movieApi = createApi({
     reducerPath: 'movieApi',
@@ -40,6 +40,9 @@ export const movieApi = createApi({
         }),
         getVideoMovie: build.query<IDataVideo, number>({
             query: (id) => `movie/${id}/videos?${API_KEY}&${language}`
+        }),
+        getTheater: build.query<IDataSimilar, number>({
+            query: () => `movie/now_playing?${API_KEY}&${language}&page=1`
         }),
         getMovieSimilar: build.query<IDataSimilar, number>({
             query: (id) => `movie/${id}/similar?${API_KEY}&${language}&page=1`
@@ -101,6 +104,14 @@ export const movieApi = createApi({
             }),
             invalidatesTags: ['movie'],
         }),
+        makeRating: build.mutation<IDataMakeRating, IPropsMakeRating>({
+            query: ({body,params}) => ({
+                url: `movie/${params.id}/rating?${API_KEY}&session_id=${params.session_id}`,
+                method: 'POST',
+                body,
+            }),
+
+        }),
         getStateMovie: build.query<IDataStateMovie,IPropsStateMovie>({
             query: ({params}) => `movie/${params.movie_id}/account_states?${API_KEY}&session_id=${params.session_id}`,
         }),
@@ -112,6 +123,7 @@ export const movieApi = createApi({
 export const {
     useGetMovieQuery,
     useGetMovieSimilarQuery,
+    useGetTheaterQuery,
     useGetTrendingMovieQuery,
     useGetFilteredMovieQuery,
     useGetUpcomingMovieQuery,
@@ -128,7 +140,7 @@ export const {
     useGetFavoriteQuery,
     useMakeFavoriteMutation,
     useLazyGetStateMovieQuery,
-    useGetStateMovieQuery,
+    useMakeRatingMutation
 
 } = movieApi;
 

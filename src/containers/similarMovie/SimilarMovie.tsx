@@ -11,12 +11,13 @@ import {useAppSelector} from "../../hooks/hook";
 
 
 interface SimilarMovieProp {
+    movieId: number,
     breakpointsProp: {}
 }
 
-const SimilarMovie: FC<SimilarMovieProp> = memo(({breakpointsProp}) => {
+const SimilarMovie: FC<SimilarMovieProp> = memo(({movieId,breakpointsProp}) => {
 
-    const {movieId} = useAppSelector(state => state.movie);
+
     const {data, isLoading, isError,status} = useGetMovieSimilarQuery(movieId);
     const breakpointsValue = breakpointsProp ? breakpointsProp : defaultBreakpoints;
     const dataResults = data ? data.results : [];
