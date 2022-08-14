@@ -1,0 +1,45 @@
+.item{
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+  margin: 15px 0 ;
+
+  padding: 10px 15px;
+  text-align: center;
+  flex-wrap: wrap;
+  background-color: rgba(0,0,0,.3);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, .1);
+
+
+}
+
+.name{
+  font-size: 15px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.count{
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.root{
+padding: 0 10px;
+
+}
+
+.remove{
+  margin-left: 5px;
+  &:hover{
+    opacity: .5;
+    transition: all .3s;
+    cursor: pointer;
+  }
+}
+.inner{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

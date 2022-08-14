@@ -39,7 +39,7 @@ const SnackBars = () => {
 
     return (
         <Stack spacing={2} sx={{ width: '100%' }}>
-            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+            <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity={variant} sx={{ width: '100%' }}>
                     {message}
                 </Alert>

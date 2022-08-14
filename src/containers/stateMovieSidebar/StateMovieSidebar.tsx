@@ -12,6 +12,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import styles from './stateMovieSidebar.module.scss'
 import RatingSidebar from "../ratingSidebar/RatingSidebar";
+import RosterSidebar from "../RosterSidebar/RosterSidebar";
 
 interface IMakeFavoriteProps {
     idMovie: number
@@ -47,7 +48,6 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
         }
     };
 
-    console.log(data);
 
     const onMakeFavorite = async (e: React.MouseEvent<HTMLOrSVGElement>) => {
         e.preventDefault();
@@ -160,6 +160,9 @@ const StateMovieSidebar: FC<IMakeFavoriteProps> = ({idMovie}) => {
                     handleClose();
                 }}>
                     {rating}
+                </MenuItem>
+                <MenuItem>
+                 <RosterSidebar movieId={idMovie} />
                 </MenuItem>
             </Menu>
         </>

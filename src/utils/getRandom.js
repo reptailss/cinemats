@@ -12,3 +12,8 @@ export const  getRandom = (arr, n) => {
     }
     return result;
 }
+
+
+export const getRandomNumber = (min, max) => {
+    return Math.random() * (max - min) + min;
+}

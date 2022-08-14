@@ -19,10 +19,15 @@
 .img{
   width: 35px;
   height: 35px;
+  transition: all .3s;
   @media (max-width: 500px) {
     width: 27px;
     height: 27px;
 
+  }
+  &:hover{
+    cursor: pointer;
+    opacity: .5;
   }
 
 }

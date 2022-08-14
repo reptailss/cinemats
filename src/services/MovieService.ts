@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {API_KEY, API_URL,language} from "../constans/api"
+import {API_KEY, API_URL, language} from "../constans/api"
 
 import {IMovie} from "../types/movie";
 import {IDataVideo} from "../types/video";
@@ -15,25 +15,42 @@ import {IBaseQuery, IFiltersQuery} from "../types/query"
 import {
     IBodyAuthSession,
     IBodyOutAuthSession,
+    IBodyValidateToken,
     IDataAuthSession,
     IDataAuthToken,
     IDataOutAuthSession,
-    IDataValidateToken,
-    IBodyValidateToken
+    IDataValidateToken
 } from "../types/auth";
 
-import {IDataMakeFavorite,IPropsMakeFavorite} from "../types/makeFavorite";
+import {IDataMakeFavorite, IPropsMakeFavorite} from "../types/makeFavorite";
 
-import {IDataStateMovie,IPropsStateMovie} from '../types/stateMovie'
-import {IDataMakeRating,IPropsMakeRating} from '../types/rating'
+import {IDataStateMovie, IPropsStateMovie} from '../types/stateMovie'
+import {IDataMakeRating, IPropsMakeRating} from '../types/rating'
+import {
+    IDataAddItemRoster,
+    IDataClearRoster,
+    IDataListRoster,
+    IDataNewRoster,
+    IDataRemoveItemRoster,
+    IDataRoster,
+    IDataRosterBelongMovie,
+    IDataStatusRoster,
+    IDeleteRoster, IDeleteRosterProps,
+    IPropsAddItemRoster,
+    IPropsListRoster,
+    IPropsNewRoster,
+    IPropsRemoveItemRoster,
+    IPropsRosterBelongMovie,
+    IPropsStatusRoster
+} from "../types/roster";
 
 export const movieApi = createApi({
     reducerPath: 'movieApi',
     baseQuery: fetchBaseQuery({baseUrl: API_URL}),
-    tagTypes: ['movie'],
+    tagTypes: ['movie','roster'],
     endpoints: (build) => ({
         getMovie: build.query<IMovie, number>({
-            query: (id) => `movie/${id}?${API_KEY}&language=en-US`
+            query: (id) => `movie/${id}?${API_KEY}&${language}`
         }),
         getUpcomingMovie: build.query<IDataUpcoming, number>({
             query: (page) => `movie/upcoming?${API_KEY}&${language}&page=${page}`
@@ -97,7 +114,7 @@ export const movieApi = createApi({
             providesTags: ['movie'],
         }),
         makeFavorite: build.mutation<IDataMakeFavorite, IPropsMakeFavorite>({
-            query: ({body,params}) => ({
+            query: ({body, params}) => ({
                 url: `account/${params.id}/favorite?${API_KEY}&session_id=${params.session_id}`,
                 method: 'POST',
                 body,
@@ -105,15 +122,71 @@ export const movieApi = createApi({
             invalidatesTags: ['movie'],
         }),
         makeRating: build.mutation<IDataMakeRating, IPropsMakeRating>({
-            query: ({body,params}) => ({
+            query: ({body, params}) => ({
                 url: `movie/${params.id}/rating?${API_KEY}&session_id=${params.session_id}`,
                 method: 'POST',
                 body,
             }),
 
         }),
-        getStateMovie: build.query<IDataStateMovie,IPropsStateMovie>({
+        getStateMovie: build.query<IDataStateMovie, IPropsStateMovie>({
             query: ({params}) => `movie/${params.movie_id}/account_states?${API_KEY}&session_id=${params.session_id}`,
+        }),
+        getRoster: build.query<IDataRoster, number>({
+            query: (list_id) => `list/${list_id}?${API_KEY}&${language}`,
+        }),
+        getListRoster: build.query<IDataListRoster, IPropsListRoster>({
+            query: ({params}) => `account/${params.account_id}/lists?${API_KEY}&${language}&session_id=${params.session_id}&page=1`,
+            providesTags: ['roster'],
+        }),
+        getStatusRoster: build.query<IDataStatusRoster, IPropsStatusRoster>({
+            query: ({params}) => `list/${params.list_id}/item_status?${API_KEY}&movie_id=${params.movie_id}`,
+
+        }),
+        getRosterBelongMovie: build.query<IDataRosterBelongMovie, IPropsRosterBelongMovie>({
+            query: ({params}) => `movie/${params.movie_id}/lists?${API_KEY}&${language}&page=1`,
+
+        }),
+
+        newRoster: build.mutation<IDataNewRoster, IPropsNewRoster>({
+            query: ({body, params}) => ({
+                url: `list?${API_KEY}&session_id=${params.session_id}`,
+                method: 'POST',
+                body,
+            }),
+            invalidatesTags: ['roster'],
+
+        }),
+        deleteRoster: build.mutation<IDeleteRoster, IDeleteRosterProps>({
+            query: ({params}) => ({
+                url: `list/${params.list_id}?${API_KEY}&session_id=${params.session_id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['roster'],
+
+        }),
+        clearRoster: build.mutation<IDataClearRoster, number>({
+            query: (list_id) => ({
+                url: `list/${list_id}/clear?${API_KEY}`,
+                method: 'POST',
+            }),
+
+        }),
+        addItemRoster: build.mutation<IDataAddItemRoster, IPropsAddItemRoster>({
+            query: ({body, params}) => ({
+                url: `list/${params.list_id}/add_item?${API_KEY}&session_id=${params.session_id}`,
+                method: 'POST',
+                body,
+            }),
+
+        }),
+        removeItemRoster: build.mutation<IDataRemoveItemRoster, IPropsRemoveItemRoster>({
+            query: ({body, params}) => ({
+                url: `list/${params.list_id}/remove_item?${API_KEY}&session_id=${params.session_id}`,
+                method: 'POST',
+                body,
+            }),
+
         }),
     })
 
@@ -140,7 +213,13 @@ export const {
     useGetFavoriteQuery,
     useMakeFavoriteMutation,
     useLazyGetStateMovieQuery,
-    useMakeRatingMutation
+    useMakeRatingMutation,
+    useGetListRosterQuery,
+    useLazyGetListRosterQuery,
+    useAddItemRosterMutation,
+    useGetRosterQuery,
+    useDeleteRosterMutation,
+    useNewRosterMutation
 
 } = movieApi;
 

@@ -8,10 +8,12 @@ import styles from './userSidebar.module.scss'
 import plugAvatar from '../../resources/img/user-svgrepo-com.svg'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import ListIcon from '@mui/icons-material/List';
 
 
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+
 
 
 const UserSidebar = () => {
@@ -66,7 +68,14 @@ const UserSidebar = () => {
                                 </Link>
 
                             </MenuItem>
-
+                            <MenuItem onClick={handleClose}>
+                                <Link className={styles.link} to={'list'}>
+                                <ListItemIcon>
+                                    <ListIcon/>
+                                </ListItemIcon>
+                                my Lists
+                            </Link>
+                            </MenuItem>
                             <MenuItem onClick={handleClose}><SiginOut/></MenuItem>
                         </Menu>
                     </div>

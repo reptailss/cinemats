@@ -1,0 +1,91 @@
+.item{
+  margin-bottom: 15px;
+}
+
+.info{
+  padding: 15px 15px;
+  margin: 15px auto;
+
+  @media (max-width: 500px) {
+    padding: 20px 15px;
+  }
+}
+
+.rootList{
+  background-color: rgba(255, 255, 255, .1);
+  border-radius: 10px;
+  padding: 15px 5px;
+  margin: 5px 0 10px;
+  border: 1px solid rgba(255, 255, 255, .1);
+}
+
+
+.infoSidebar{
+  padding: 20px 0 25px;
+  color: #ffffff;
+  background-color: rgba(0,0,0,.3);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  margin: 15px auto;
+  @media (max-width: 500px) {
+    padding: 25px 0;
+  }
+}
+.name{
+  font-size: 30px;
+  font-weight: 700;
+text-align: center;
+  @media (max-width: 500px) {
+    font-size: 17px;
+  }
+}
+
+.created{
+  padding-left: 15px;
+}
+.author{
+  font-size: 20px;
+  margin-left: 5px;
+  font-weight: 700;
+  @media (max-width: 500px) {
+    font-size: 15px;
+  }
+}
+
+.backdrop{
+  position: absolute;
+  top:0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;;
+}
+.rootInfo{
+  position: relative;
+
+}
+
+.description{
+  padding-left: 15px;
+  font-size: 15px;
+}
+.titledesc{
+  font-size: 17px;
+}
+.desccontent{
+  padding-left: 30px;
+}
+.total{
+  text-align: right;
+  font-size: 17px;
+  padding-right: 15px;
+  & span{
+    font-weight: 700;
+    margin-left: 4px;
+  }
+}
