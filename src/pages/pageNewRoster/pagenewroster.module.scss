@@ -1,0 +1,14 @@
+.btn{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.title{
+  color: #ffffff;
+
+}
+.backbtn:disabled{
+  color: rgba(255,255,255,.2)!important;
+}

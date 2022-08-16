@@ -1,6 +1,6 @@
 .root {
   display: flex;
-  min-height: 100px;
+  min-height: 70px;
 
   color: white!important;
   position: relative;
@@ -24,16 +24,28 @@
   cursor: pointer;
   transition: all .3s;
   border-radius: 10px;
-
+  max-width: 300px;
+  margin: 0 auto;
+  @media (max-width: 700px) {
+   max-width: 150px;
+    margin: 0 auto;
+  }
 }
 
 .box{
   //padding: 3px 0!important;
-  padding: 15px 0;
+  padding: 30px 0 15px!important;;
+  @media (max-width: 700px) {
+    padding: 30px 0 15px!important;;
+  }
 }
 .title{
-  font-size: 15px;
+  font-size: 15px!important;
   padding-left: 15px;
+  @media (max-width: 700px) {
+    padding-left: 5px;
+    font-size: 12px!important;
+  }
 }
 .rating{
   font-size: .75rem;
@@ -56,9 +68,20 @@
 .over{
   margin-top: 10px;
   padding: 0 1rem;
+  font-size: 14px!important;
+  @media (max-width: 500px) {
+    padding: 0 5px;
+    font-size: 11px!important;
+  }
 }
 .sidebar{
   position: absolute;
   right: 10px;
-  top: 10px
+  top: 5px
+}
+
+.addrosterbtn{
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }

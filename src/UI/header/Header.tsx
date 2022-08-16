@@ -14,7 +14,9 @@ const Header: FC = memo(() => {
 
     const location = useLocation();
     const searchLocation = (location.pathname === '/search');
-    const searchBlock = !searchLocation ? <SearchInput/> : null;
+    const searchLocationNew = (location.pathname === '/list/new');
+    // const searchBlock = !searchLocation || !searchLocationNew ? <SearchInput/> : null;
+    const searchBlock = searchLocation || searchLocationNew ? null : <SearchInput/>;
 
     const classSearch = searchLocation ? 'header__search searchPage' : 'header__search';
 

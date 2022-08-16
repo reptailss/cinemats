@@ -32,7 +32,7 @@ const FilterMovie: FC = memo(() => {
             {data?.results?.length ? <ListSearch
                 status={status}
                 isLoading={isLoading}
-                lenghtOverview={350}
+                lenghtOverview={30}
                 data={data.results}
             /> : <NoResults/>}
             {pagination}

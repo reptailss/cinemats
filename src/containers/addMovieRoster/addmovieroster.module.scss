@@ -1,0 +1,16 @@
+.root {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 500px;
+  margin-top: 30px;
+  padding-top: 40px;
+}
+
+
+
+.root::-webkit-scrollbar-thumb {
+  background-color: blue;
+  width: 2px
+;
+}
+

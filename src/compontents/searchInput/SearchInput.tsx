@@ -26,7 +26,8 @@ const SearchInput: FC = memo(() => {
 
         };
 
-        const clazzInner = !(location.pathname === '/search') ? styles.inner + ' ' + styles.searchMedia : styles.inner;
+        // const clazzInner = !(location.pathname === '/search') ? styles.inner + ' ' + styles.searchMedia : styles.inner;
+        const clazzInner = location.pathname === '/search' || location.pathname === '/list/new' ? styles.inner : styles.inner + ' ' + styles.searchMedia;
 
         return (
             <>
@@ -39,14 +40,20 @@ const SearchInput: FC = memo(() => {
                                label="Search"
 
                     />
-                    <Link to='/search'>
+
+                    {location.pathname === '/list/new' ?   <IconButton
+                        className={styles.button}
+                        sx={{p: '10px'}}
+                        aria-label="search">
+                        <SearchIcon/>
+                    </IconButton> :    <Link to='/search'>
                         <IconButton
                             className={styles.button}
                             sx={{p: '10px'}}
                             aria-label="search">
                             <SearchIcon/>
                         </IconButton>
-                    </Link>
+                    </Link>}
                 </div>
 
             </>

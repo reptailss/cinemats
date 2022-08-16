@@ -1,9 +1,8 @@
 import React, {FC, memo} from 'react';
 import {setMovieId} from "../../redux/slice/movieSlice"
-import {Link} from "react-router-dom"
-import {useAppDispatch} from "../../hooks/hook";
+import {Link, useLocation} from "react-router-dom"
+import {useAppDispatch, useAppSelector} from "../../hooks/hook";
 import {AnimatePresence, motion} from "framer-motion";
-import {useAppSelector} from "../../hooks/hook";
 
 import {Col, Row} from 'react-bootstrap'
 
@@ -19,9 +18,9 @@ import PlugImg from '../../resources/img/plugimg.png'
 import sliceString from '../../utils/sliceString'
 
 
-import styles from './itemSearch.module.scss'
-;
+import styles from './itemSearch.module.scss';
 import StateMovieSidebar from "../../containers/stateMovieSidebar/StateMovieSidebar";
+import AddNewMovieRosterBtn from "../../containers/addNewMovieRosterBtn/addNewMovieRosterBtn";
 
 interface ItemSearchProps extends IMovie {
     lenghtOverview: number
@@ -31,7 +30,7 @@ interface ItemSearchProps extends IMovie {
 const ItemSearch: FC<ItemSearchProps> = memo(({title, name, poster_path, backdrop_path, id, overview, lenghtOverview}) => {
 
     const dispatch = useAppDispatch();
-
+    const location = useLocation();
     const {auth} = useAppSelector(state => state.auth);
 
     const onChangeMovieId = (id: number) => {
@@ -43,6 +42,9 @@ const ItemSearch: FC<ItemSearchProps> = memo(({title, name, poster_path, backdro
 
     const overviewDesc = lenghtOverview ? sliceString(overview, lenghtOverview) : overview;
 
+    const addRosterBtn = location.pathname === '/list/new' ? <div className={styles.addrosterbtn}>
+        <AddNewMovieRosterBtn movieId={id}/>
+    </div> : null;
     return (
         <AnimatePresence>
             <motion.div
@@ -59,7 +61,7 @@ const ItemSearch: FC<ItemSearchProps> = memo(({title, name, poster_path, backdro
                     onChangeMovieId(id)
                 }}>
                 <Row className={styles.row}>
-                    <Col className={styles.innerImg} xl={3}>
+                    <Col className={styles.innerImg} xs={6} xl={3}>
                         <Link className={styles.link} to={`../movie/${id}`}>
                             <Tooltip arrow placement="right" title="more">
                                 <CardMedia
@@ -70,7 +72,7 @@ const ItemSearch: FC<ItemSearchProps> = memo(({title, name, poster_path, backdro
                             </Tooltip>
                         </Link>
                     </Col>
-                    <Col xl={9}>
+                    <Col xs={6} xl={9}>
                         <CardContent className={styles.box}>
                             <Typography
                                 component="div"
@@ -85,7 +87,7 @@ const ItemSearch: FC<ItemSearchProps> = memo(({title, name, poster_path, backdro
                             {auth ? <div className={styles.sidebar}>
                                 <StateMovieSidebar idMovie={id}/>
                             </div> : null}
-
+                            {addRosterBtn}
                         </CardContent>
                     </Col>
                 </Row>

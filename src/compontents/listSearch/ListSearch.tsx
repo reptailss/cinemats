@@ -24,7 +24,7 @@ const ListSearch: FC<IListSearchProps> = ({data,lenghtOverview,isLoading,isError
         return (
             <Col xl="12"
                  className='align-items-stretch'
-                 style={{marginTop: '25px'}}
+                 style={{marginTop: '10px'}}
                  key={item.id}>
                 <ItemSearch
                     lenghtOverview={lenghtOverview}
@@ -38,7 +38,7 @@ const ListSearch: FC<IListSearchProps> = ({data,lenghtOverview,isLoading,isError
 
             <Col xl="12"
                  className='align-items-stretch'
-                 style={{marginTop: '25px'}}
+                 style={{marginTop: '10px'}}
                  key={index}>
                 <SkeletonMovie height={224.6}/>
             </Col>

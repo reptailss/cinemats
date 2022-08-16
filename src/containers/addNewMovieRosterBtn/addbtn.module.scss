@@ -1,0 +1,14 @@
+.btn{
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  padding: 10px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  text-transform: uppercase;
+  transition: all .3s;
+  &:hover{
+    cursor: pointer;
+    opacity: .5;
+  }
+
+}

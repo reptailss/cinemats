@@ -1,5 +1,5 @@
-import React, {memo, useCallback, useEffect, useRef, useState} from 'react';
-import {useParams} from 'react-router-dom'
+import React, {memo, useEffect, useRef, useState} from 'react';
+import {useParams,useNavigate } from 'react-router-dom'
 import {useGetRosterQuery} from '../../services/MovieService'
 import {Col, Container, Row} from 'react-bootstrap'
 import styles from './pagesRoster.module.scss'
@@ -10,6 +10,21 @@ import NotAuth from "../../compontents/notAuth/NotAuth";
 import pathImg from "../../utils/pathImg";
 import SpinnerBlock from "../../compontents/spinner/Spinner";
 import {getRandomNumber} from "../../utils/getRandom";
+import BackBtn from "../../compontents/backBtn/backBtn";
+
+
+
+const NotMovie = () => {
+    const navigate = useNavigate();
+    return (
+        <div className={styles.noMovie}>
+            <span>
+                You haven't added any movies yet..
+            </span>
+          <BackBtn/>
+            </div>
+    )
+};
 
 
 const PagesRoster = memo(() => {
@@ -20,19 +35,23 @@ const PagesRoster = memo(() => {
     const {data} = useGetRosterQuery(listId);
     const ref = useRef(true);
 
-    const [srcBackdrop,setSrcBackdrop] = useState<any>();
-    useEffect(()=>{
-        if(data && ref){
+    const [srcBackdrop, setSrcBackdrop] = useState<any>();
+    useEffect(() => {
+        if (data?.items.length && ref) {
             const dataLenght = data ? data?.items.length : 1;
             const index = Math.floor(getRandomNumber(0, dataLenght));
-            const src =  pathImg(data?.items[index].backdrop_path);
+            const src = pathImg(data?.items[index].backdrop_path);
             setSrcBackdrop(src);
         }
-    },[data]);
+    }, [data]);
 
 
-    const styleBackdrop = {
+
+    const styleBackdrop = data?.items.length ? {
         backgroundImage: `url(${srcBackdrop})`,
+        filter: 'blur(3.57px)'
+    } : {
+        backgroundColor: `#00000)`,
         filter: 'blur(3.57px)'
     };
     const list = data?.items.map((item) => {
@@ -47,9 +66,12 @@ const PagesRoster = memo(() => {
             </Col>
         )
     });
-console.log(data)
+    console.log(data)
 
-    const content = data ? auth ? <div>
+
+    const content = data ?
+        auth ?
+         <div>
             <div className={styles.rootInfo}>
                 {data ? <div className={styles.backdrop}
                              style={styleBackdrop}/> : null}
@@ -64,10 +86,10 @@ console.log(data)
                             <span className={styles.author}>{data?.created_by}</span>
                         </div>
 
-                            <div className={styles.description}>
-                                <div className={styles.titledesc}>description:</div>
-                               <div className={styles.desccontent}> {data?.description}</div>
-                            </div>
+                        <div className={styles.description}>
+                            <div className={styles.titledesc}>description:</div>
+                            <div className={styles.desccontent}> {data?.description}</div>
+                        </div>
                         <div className={styles.total}>
                             Total Movie: <span>{data?.item_count}</span>
                         </div>
@@ -77,13 +99,17 @@ console.log(data)
             </div>
             <Container>
                 <Row className={styles.rootList}>
-                    {list}
+                    {data?.items.length ? list : <NotMovie/>}
                 </Row>
             </Container>
-        </div> :
+        </div>
+        :
         <NotAuth text={'log in to view movies'}/> :
         <Container>
-            <SpinnerBlock/>
+            <div className={styles.spinner}>
+                <SpinnerBlock/>
+            </div>
+
         </Container>;
 
 

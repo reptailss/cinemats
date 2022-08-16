@@ -89,3 +89,20 @@ text-align: center;
     margin-left: 4px;
   }
 }
+
+.spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.noMovie{
+  text-align: center;
+  margin-top: 20px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & span{
+    margin-right: 10px;
+  }
+}

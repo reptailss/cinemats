@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Container} from 'react-bootstrap'
 import {useNewRosterMutation} from '../../services/MovieService'
@@ -23,7 +23,13 @@ const validationSchema = yup.object({
 });
 
 
-const AddRoster = () => {
+
+interface IAddRosterProps {
+    onSubmit: () => void
+}
+
+
+const AddRoster:FC<IAddRosterProps> = ({onSubmit}) => {
     const session_id = localStorage.getItem('session_id');
     const navigate = useNavigate();
     const [newRoster] = useNewRosterMutation();
@@ -45,8 +51,9 @@ const AddRoster = () => {
             // @ts-ignore
             if (res?.data) {
                 setSnackBar('you have successfully added the list', 'success');
-                navigate("/list", {replace: true});
+                // navigate("/list", {replace: true});
                 setLoading(false);
+                onSubmit();
 
             }
 
@@ -75,8 +82,11 @@ const AddRoster = () => {
                 ...values
             });
 
+
         },
     });
+
+
 
     const content = !loading ? <div className={styles.root}>
 
@@ -108,11 +118,12 @@ const AddRoster = () => {
             <div className={styles.wrapbtn}>
                 <Button
                     className={styles.button}
-                    color="primary"
                     variant="contained"
+                    sx={{mt: 1, mr: 1}}
                     fullWidth type="submit">
-                    Submit
+                    CONTINUE
                 </Button>
+
 
             </div>
         </form>

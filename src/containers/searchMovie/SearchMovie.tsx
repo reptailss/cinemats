@@ -15,7 +15,7 @@ const SearchMovie: FC = memo(() => {
             <>
                 {data?.results?.length ?
                     <ListSearch
-                        lenghtOverview={1000}
+                        lenghtOverview={120}
                         data={data.results}
                         isLoading={isLoading}
                     /> : null}
