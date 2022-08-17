@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
-import {useNavigate} from "react-router-dom";
 import {Container} from 'react-bootstrap'
 import {useNewRosterMutation} from '../../services/MovieService'
+import {setRosterId} from '../../redux/slice/rosterSlice'
 import {useSnackBar} from "../../hooks/useSnackBars";
 import * as yup from 'yup';
 import TextField from '@mui/material/TextField';
@@ -9,6 +9,7 @@ import styles from './addroster.module.scss'
 import {useFormik} from "formik";
 import Button from '@mui/material/Button'
 import SpinnerBlock from "../../compontents/spinner/Spinner";
+import {useAppDispatch} from "../../hooks/hook";
 
 
 
@@ -18,7 +19,7 @@ const validationSchema = yup.object({
         .min(5, 'minimum 5 characters'),
     description: yup
         .string()
-        .min(10, 'minimum 10 characters')
+        .min(5, 'minimum 5 characters')
 
 });
 
@@ -31,10 +32,12 @@ interface IAddRosterProps {
 
 const AddRoster:FC<IAddRosterProps> = ({onSubmit}) => {
     const session_id = localStorage.getItem('session_id');
-    const navigate = useNavigate();
+
     const [newRoster] = useNewRosterMutation();
     const {setSnackBar} = useSnackBar();
     const [loading, setLoading] = useState(false);
+
+    const dispath = useAppDispatch();
     const onAddRoster = async (body: any) => {
 
         try {
@@ -49,10 +52,11 @@ const AddRoster:FC<IAddRosterProps> = ({onSubmit}) => {
                 }
             });
             // @ts-ignore
-            if (res?.data) {
+            if (res.data) {
                 setSnackBar('you have successfully added the list', 'success');
-                // navigate("/list", {replace: true});
                 setLoading(false);
+                // @ts-ignore
+                dispath(setRosterId(res?.data.list_id));
                 onSubmit();
 
             }
@@ -123,7 +127,7 @@ const AddRoster:FC<IAddRosterProps> = ({onSubmit}) => {
                     fullWidth type="submit">
                     CONTINUE
                 </Button>
-
+s
 
             </div>
         </form>

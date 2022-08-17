@@ -5,13 +5,13 @@ import { createSlice, PayloadAction} from '@reduxjs/toolkit'
 interface IInitialState {
 
 
-    rosterId: number,
+    rosterId: number
     rosterListMovie: number[]
 }
 
 const initialState:IInitialState = {
 
-    rosterId: 0,
+    rosterId: 8213723,
     rosterListMovie: []
 };
 

@@ -26,10 +26,12 @@ export interface IPropsStatusRoster {
 }
 
 export interface IDataNewRoster {
-    status_message: string,
-    success: boolean,
-    status_code: number,
-    list_id: number,
+    data: {
+        status_message: string,
+        success: boolean,
+        status_code: number,
+        list_id: number,
+    }
 }
 
 export interface IBodyNewRoster {
@@ -133,5 +135,33 @@ export interface IPropsListRoster {
         session_id: string | null,
         page?: number,
         account_id: number
+    }
+}
+
+
+
+
+
+
+export interface IDataAddMultiItemsRosterV4 {
+    status_code: number,
+    status_message: string
+}
+
+export interface IBodyAddItemRosterV4 {
+    items: IItemBodyAddRosterV4 []
+
+}
+export interface IItemBodyAddRosterV4 {
+    media_type: string,
+    media_id: number
+
+}
+
+export interface IPropsAddMultiItemsRosterV4 {
+    body: IBodyAddItemRosterV4,
+    params: {
+        session_id: string | null,
+        list_id: number
     }
 }

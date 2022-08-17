@@ -1,27 +1,12 @@
-// export default PageNewRoster;
-//
-//
-// import React from 'react';
-// import AddRoster from "../../containers/addRoster/AddRoster";
-//
-// const PageNewRoster = () => {
-//     return (
-//         <div>
-//             <AddRoster/>
-//         </div>
-//     );
-// };
-//
-// export default PageNewRoster;
-
 import {useState} from 'react';
+import {useNavigate} from "react-router-dom";
+
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
 import {Col, Container, Row} from 'react-bootstrap'
@@ -29,6 +14,8 @@ import AddRoster from "../../containers/addRoster/AddRoster";
 
 import styles from './pagenewroster.module.scss'
 import AddMovieRoster from "../../containers/addMovieRoster/addMovieRoster";
+import {useAppSelector} from "../../hooks/hook";
+
 
 const steps = [
     {
@@ -36,7 +23,7 @@ const steps = [
         description: `enter a name and description for your list.`,
     },
     {
-        label: 'add movies',
+        label: 'Add movies',
         description:
             'select which movies to add to the list.',
     },
@@ -45,7 +32,8 @@ const steps = [
 
 const PageNewRoster = () => {
     const [activeStep, setActiveStep] = useState(0);
-
+    const navigate = useNavigate();
+    const {rosterId} = useAppSelector(state => state.roster)
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -54,18 +42,15 @@ const PageNewRoster = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handleReset = () => {
-        setActiveStep(0);
+    const toLinkList = () => {
+        navigate(`/list/${rosterId}`)
     };
-
-
-
 
 
     return (
         <Container>
-            <Row>
-                <Col xl={6}>
+            <Row className={styles.row}>
+                <Col className={styles.steepRoot} xs={12} xl={5}>
                     <Box>
                         <Stepper activeStep={activeStep} orientation="vertical">
                             {steps.map((step, index) => (
@@ -80,39 +65,19 @@ const PageNewRoster = () => {
                                         <div className={styles.title}>
                                             {step.label}
                                         </div>
-
                                     </StepLabel>
                                     <StepContent>
-                                        <Typography>{step.description}</Typography>
-
+                                        <Typography className={styles.description}>{step.description}</Typography>
                                     </StepContent>
                                 </Step>
                             ))}
                         </Stepper>
-                        {activeStep === steps.length && (
-                            <Paper square elevation={0} sx={{p: 3}}>
-                                <Typography>All steps completed - you&apos;re finished</Typography>
-                                <Button onClick={handleReset} sx={{mt: 1, mr: 1}}>
-                                    Reset
-                                </Button>
-                            </Paper>
-                        )}
                     </Box>
 
                 </Col>
 
-                <Col xl={6}>
-                    {activeStep === 0 ? <AddRoster onSubmit={handleNext}/> : activeStep === 1 ? <AddMovieRoster/> : null}
-
-                </Col>
-                <div className={styles.btn}>
-                    {activeStep === steps.length ? null : <>: <Button
-                        variant="contained"
-                        onClick={handleNext}
-                        sx={{mt: 1, mr: 1}}
-                    >
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Continue'}
-                    </Button>
+                <Col xs={12} xl={5}>
+                    <div className={styles.backinner}>
                         <Button
                             className={styles.backbtn}
                             disabled={activeStep === 0}
@@ -121,9 +86,25 @@ const PageNewRoster = () => {
                         >
                             Back
                         </Button>
-                    </>}
+                    </div>
+                    {activeStep === 0 ? <AddRoster onSubmit={handleNext}/> : activeStep === 1 ?
+                        <AddMovieRoster/> : null}
 
-                </div>
+                </Col>
+
+                    {activeStep === steps.length - 1 ? <Button className={styles.btnFinish}
+                        variant="contained"
+                        onClick={() => {
+                            handleNext();
+                            toLinkList();
+                        }
+                        }
+                        sx={{mt: 1, mr: 1}}
+                    >
+                        Finish
+                    </Button> : null}
+
+
 
             </Row>
         </Container>
