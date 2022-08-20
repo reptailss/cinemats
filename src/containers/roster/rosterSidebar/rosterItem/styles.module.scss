@@ -1,0 +1,39 @@
+.button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.item {
+  text-transform: initial;
+  color: #000000;
+  font-size: 16px;
+
+  padding: 2px 3px;
+  width: 100%;
+
+
+}
+
+.buttonMenu {
+  color: #000000;
+  text-transform: initial;
+}
+
+.btnName {
+  margin-right: 5px;
+}
+
+.btnIcon {
+  color: #000000;
+}
+
+

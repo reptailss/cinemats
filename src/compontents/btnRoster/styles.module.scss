@@ -1,0 +1,10 @@
+.btn{
+  text-transform: initial;
+  color: #000000;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  & span{
+    margin-right: 10px;
+  }
+}

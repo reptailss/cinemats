@@ -15,7 +15,7 @@ import pathImg from '../../utils/pathImg'
 import sliceString from "../../utils/sliceString"
 
 import PlugImg from '../../resources/img/plugimg.png'
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import styles from './itemMovie.module.scss'
 import {FC, memo} from "react"
 import StateMovieSidebar from "../../containers/stateMovieSidebar/StateMovieSidebar";
@@ -27,6 +27,7 @@ const ItemMovie: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vo
 
     const params = useLocation();
     const pathLink = params.pathname.includes(`/movie`) ? `/../movie/${id}` : `movie/${id}`;
+    const pageList = params.pathname.includes(`/list`);
     const dispatch = useDispatch();
     const onChangeMovieId = (id: number) => {
         dispatch(setMovieId(id))
@@ -37,10 +38,14 @@ const ItemMovie: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vo
 
 
 
+
+
     const imgBlock = !params.pathname.includes(`/movie`) ?
         <Tooltip arrow placement="top" title="more">
             <CardMedia
-                onClick={() => {onChangeMovieId(id)}}
+                onClick={() => {
+                    onChangeMovieId(id)
+                }}
                 style={{minHeight: minHeightImg}}
                 component="img"
                 className={styles.images}
@@ -48,11 +53,11 @@ const ItemMovie: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vo
                 alt={titleMovie}/>
         </Tooltip>
         : <CardMedia
-                style={{minHeight: minHeightImg}}
-                component="img"
-                className={styles.images}
-                image={imgMovie}
-                alt={titleMovie}/>;
+            style={{minHeight: minHeightImg}}
+            component="img"
+            className={styles.images}
+            image={imgMovie}
+            alt={titleMovie}/>;
 
 
     return (
@@ -84,7 +89,9 @@ const ItemMovie: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vo
                     {auth ? <div className={styles.sidebar}>
                         <StateMovieSidebar idMovie={id}/>
                     </div> : null}
-
+                    {pageList && <button className={styles.removeItemRoster}>
+                        <DeleteIcon className={styles.deleteIcon}/>
+                    </button>}
                 </Card>
 
             </motion.div>

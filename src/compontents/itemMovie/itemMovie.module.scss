@@ -36,3 +36,17 @@
   top: 10px;
   right: 3px;
 }
+
+.removeItemRoster{
+  position: absolute;
+  bottom: 30px;
+  right: 5px;
+  padding: 5px 8px !important;
+  min-width: auto !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  border-radius:10px !important;
+}
+
+.deleteIcon{
+  color: #ffffff;
+}

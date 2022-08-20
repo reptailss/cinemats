@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {useAddItemRosterMutation, useGetListRosterQuery} from '../../services/MovieService'
+import {useAddItemRosterMutation, useGetListRosterQuery,useLazyGetStatusRosterQuery} from '../../services/MovieService'
 import {useAppSelector} from "../../hooks/hook";
 import {useSnackBar} from '../../hooks/useSnackBars'
 
@@ -43,6 +43,7 @@ const RosterSidebar: FC<IRosterSidebarProps> = ({movieId}) => {
         }
     });
 
+    const [getStatusRoster] = useLazyGetStatusRosterQuery();
 
     const [addItemRoster, {isLoading}] = useAddItemRosterMutation();
 

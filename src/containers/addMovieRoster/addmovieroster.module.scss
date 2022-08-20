@@ -9,8 +9,6 @@
   }
 }
 
-
-
 .root::-webkit-scrollbar-thumb {
   background-color: white;
   width: 2px
@@ -18,8 +16,6 @@
 }
 
 
-
-/* Работает в Chrome, Edge и Safari */
 .root::-webkit-scrollbar {
   width: 3px;
 }

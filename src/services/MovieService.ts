@@ -47,7 +47,7 @@ import {
 export const movieApi = createApi({
     reducerPath: 'movieApi',
     baseQuery: fetchBaseQuery({baseUrl: API_URL}),
-    tagTypes: ['movie','roster'],
+    tagTypes: ['movie','roster','mutationRoster'],
     endpoints: (build) => ({
         getMovie: build.query<IMovie, number>({
             query: (id) => `movie/${id}?${API_KEY}&${language}`
@@ -134,13 +134,15 @@ export const movieApi = createApi({
         }),
         getRoster: build.query<IDataRoster, number>({
             query: (list_id) => `list/${list_id}?${API_KEY}&${language}`,
+            providesTags: ['mutationRoster'],
         }),
         getListRoster: build.query<IDataListRoster, IPropsListRoster>({
             query: ({params}) => `account/${params.account_id}/lists?${API_KEY}&${language}&session_id=${params.session_id}&page=1`,
-            providesTags: ['roster'],
+            providesTags: ['roster','mutationRoster'],
         }),
         getStatusRoster: build.query<IDataStatusRoster, IPropsStatusRoster>({
             query: ({params}) => `list/${params.list_id}/item_status?${API_KEY}&movie_id=${params.movie_id}`,
+            providesTags: ['mutationRoster'],
 
         }),
         getRosterBelongMovie: build.query<IDataRosterBelongMovie, IPropsRosterBelongMovie>({
@@ -178,6 +180,7 @@ export const movieApi = createApi({
                 method: 'POST',
                 body,
             }),
+            invalidatesTags: ['mutationRoster'],
 
         }),
         removeItemRoster: build.mutation<IDataRemoveItemRoster, IPropsRemoveItemRoster>({
@@ -186,7 +189,7 @@ export const movieApi = createApi({
                 method: 'POST',
                 body,
             }),
-
+            invalidatesTags: ['mutationRoster'],
         }),
     })
 
@@ -219,7 +222,10 @@ export const {
     useAddItemRosterMutation,
     useGetRosterQuery,
     useDeleteRosterMutation,
-    useNewRosterMutation
+    useNewRosterMutation,
+    useLazyGetStatusRosterQuery,
+    useGetStatusRosterQuery,
+    useRemoveItemRosterMutation
 
 } = movieApi;
 
