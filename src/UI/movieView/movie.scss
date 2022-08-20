@@ -40,6 +40,9 @@
     font-size: 25px;
     color: inherit;
     font-weight: 600;
+    @media (max-width: 500px) {
+      font-size: 17px;
+    }
   }
 
   &__text {
@@ -55,7 +58,10 @@
     padding: 20px 15px;
     border-radius: 10px;
     height: 100%;
-
+    position: relative;
+    @media (max-width: 500px) {
+      margin-top: 20px;
+    }
     &-rating {
       background-color: rgba(255,255,255, 0.2);
       border-radius: 10px;
@@ -75,6 +81,10 @@
     }
   }
 
-
+&__sidebar{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
 }
 

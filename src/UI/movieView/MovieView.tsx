@@ -12,17 +12,16 @@ import plugImg from "../../resources/img/plugimg.png"
 import plugCinema from "../../resources/img/cinema.jpg"
 import './movie.scss'
 import {IMovie} from "../../types/movie";
+import StateMovieSidebar from "../../containers/stateMovieSidebar/StateMovieSidebar";
+import {useAppSelector} from "../../hooks/hook";
 
 
-const MovieView: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vote_average, release_date, genres, overview}) => {
-
+const MovieView: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vote_average, release_date, genres, overview,id}) => {
+    const {auth} = useAppSelector(state => state.auth);
         const backdropMovie = backdrop_path ? pathImg(backdrop_path) : plugImg;
         const posterMovie = poster_path ? pathImg(poster_path) : plugImg;
-
-
         const titleMovie = title ? title : name ? name : 'нет имени'
         const raleaseMovie = sliceRalease(release_date);
-
 
         const styleBackdrop = backdrop_path ? {
             backgroundImage: `url(${backdropMovie})`,
@@ -35,10 +34,13 @@ const MovieView: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vo
         return (
             <>
                 <div className="movie__info">
+
+
                     <div className="movie__backdrop" style={styleBackdrop}/>
                     <Container className="movie__wrapper">
                         <Row className="movie__info-inner justify-content-between">
                             <Col className={"movie__inner-img"} sm={12} xl={3}>
+
                                 <div className="movie__content-rating">
                                     <Rating size="small"
                                             readOnly
@@ -53,6 +55,9 @@ const MovieView: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vo
                             </Col>
                             <Col sm={12} xl={8}>
                                 <div style={styleContent} className="movie__content">
+                                    {auth ? <div className="movie__sidebar">
+                                        <StateMovieSidebar idMovie={id}/>
+                                    </div> : null}
                                     <div className="movie__title fw-bold">
                                         {titleMovie} <span className='fw-200 title'>({raleaseMovie})</span>
                                     </div>
@@ -68,10 +73,12 @@ const MovieView: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vo
                                     <div className="mt-1  text px-3">
                                         {overview ? overview : 'no review'}
                                     </div>
+
                                 </div>
 
                             </Col>
                         </Row>
+
                     </Container>
                 </div>
             </>

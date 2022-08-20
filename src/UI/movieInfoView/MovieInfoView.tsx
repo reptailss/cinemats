@@ -14,9 +14,11 @@ import plugCinema from "../../resources/img/cinema.jpg"
 import './movieBlock.scss'
 
 import {IMovie} from "../../types/movie";
+import StateMovieSidebar from "../../containers/stateMovieSidebar/StateMovieSidebar";
+import {useAppSelector} from "../../hooks/hook";
 
 const MovieInfoView: FC<IMovie> = memo(({id, title, name, poster_path, backdrop_path, vote_average, release_date, genres, budget, overview}) => {
-
+    const {auth} = useAppSelector(state => state.auth);
     const backdropMovie = backdrop_path ? pathImg(backdrop_path) : plugImg;
     const posterMovie = poster_path ? pathImg(poster_path) : plugImg;
     const titleMovie = title ? title : name ? name : 'нет имени';
@@ -44,6 +46,9 @@ const MovieInfoView: FC<IMovie> = memo(({id, title, name, poster_path, backdrop_
                     </Col>
                     <Col sm={6} xl={7}>
                         <div style={styleContent} className="movie-block__content">
+                            {auth ? <div className="movie-block__sidebar">
+                                <StateMovieSidebar idMovie={id}/>
+                            </div> : null}
                             <div className="movie-block__title">
                                 {titleMovie} ({raleaseMovie})
                             </div>
