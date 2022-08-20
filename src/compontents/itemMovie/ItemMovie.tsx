@@ -20,9 +20,13 @@ import styles from './itemMovie.module.scss'
 import {FC, memo} from "react"
 import StateMovieSidebar from "../../containers/stateMovieSidebar/StateMovieSidebar";
 import {useAppSelector} from "../../hooks/hook";
+import {useRoster} from '../../hooks/useRoster'
 
+interface IMovieProps extends IMovie{
+    listId?: number
+}
 
-const ItemMovie: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vote_average, id, minHeightImg}) => {
+const ItemMovie: FC<IMovieProps> = memo(({title, name, poster_path, backdrop_path, vote_average, id, minHeightImg,listId}) => {
 
 
     const params = useLocation();
@@ -35,9 +39,7 @@ const ItemMovie: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vo
     const imgMovie = poster_path ? pathImg(poster_path) : backdrop_path ? pathImg(backdrop_path) : PlugImg;
     const titleMovie = title ? sliceString(title) : name ? sliceString(name) : 'нет имени';
     const {auth} = useAppSelector(state => state.auth);
-
-
-
+    const {removeItemMovie} = useRoster();
 
 
     const imgBlock = !params.pathname.includes(`/movie`) ?
@@ -89,7 +91,9 @@ const ItemMovie: FC<IMovie> = memo(({title, name, poster_path, backdrop_path, vo
                     {auth ? <div className={styles.sidebar}>
                         <StateMovieSidebar idMovie={id}/>
                     </div> : null}
-                    {pageList && <button className={styles.removeItemRoster}>
+                    {pageList && <button
+                        onClick={() => removeItemMovie(listId,id)}
+                        className={styles.removeItemRoster}>
                         <DeleteIcon className={styles.deleteIcon}/>
                     </button>}
                 </Card>

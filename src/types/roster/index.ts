@@ -78,7 +78,7 @@ export interface IPropsAddItemRoster {
     body: IBodyAddItemRoster,
     params: {
         session_id: string,
-        list_id: number
+        list_id: number | undefined
     }
 }
 
@@ -95,7 +95,7 @@ export interface IPropsRemoveItemRoster {
     body: IBodyRemoveItemRoster,
     params: {
         session_id: string,
-        list_id: number
+        list_id: number | undefined
     }
 }
 

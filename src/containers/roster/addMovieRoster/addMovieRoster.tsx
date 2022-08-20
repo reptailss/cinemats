@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchMovie from "../searchMovie/SearchMovie";
-import SearchInput from "../../compontents/searchInput/SearchInput";
+import SearchMovie from "../../searchMovie/SearchMovie";
+import SearchInput from "../../../compontents/searchInput/SearchInput";
 import styles from './addmovieroster.module.scss'
 
 const AddMovieRoster = () => {

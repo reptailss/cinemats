@@ -1,15 +1,15 @@
 import React, {FC, useState} from 'react';
 import {Container} from 'react-bootstrap'
-import {useNewRosterMutation} from '../../services/MovieService'
-import {setRosterId} from '../../redux/slice/rosterSlice'
-import {useSnackBar} from "../../hooks/useSnackBars";
+import {useNewRosterMutation} from '../../../services/MovieService'
+import {setRosterId} from '../../../redux/slice/rosterSlice'
+import {useSnackBar} from "../../../hooks/useSnackBars";
 import * as yup from 'yup';
 import TextField from '@mui/material/TextField';
 import styles from './addroster.module.scss'
 import {useFormik} from "formik";
 import Button from '@mui/material/Button'
-import SpinnerBlock from "../../compontents/spinner/Spinner";
-import {useAppDispatch} from "../../hooks/hook";
+import SpinnerBlock from "../../../compontents/spinner/Spinner";
+import {useAppDispatch} from "../../../hooks/hook";
 
 
 

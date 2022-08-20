@@ -61,7 +61,9 @@ const PagesRoster = memo(() => {
                  xs={6}
                  sm={4}
                  xl={3}>
-                <ItemMovie {...item}/>
+                <ItemMovie
+                    listId={listId}
+                    {...item}/>
 
             </Col>
         )

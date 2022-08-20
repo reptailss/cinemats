@@ -1,23 +1,21 @@
 import React from 'react';
-import {useGetListRosterQuery,useDeleteRosterMutation} from '../../services/MovieService'
-import {useSnackBar} from "../../hooks/useSnackBars";
-import {useAppSelector} from "../../hooks/hook";
+import {useGetListRosterQuery,useDeleteRosterMutation} from '../../../services/MovieService'
+import {useSnackBar} from "../../../hooks/useSnackBars";
+import {useAppSelector} from "../../../hooks/hook";
 import styles from './rosterlist.module.scss'
-import SpinnerBlock from "../../compontents/spinner/Spinner";
+import SpinnerBlock from "../../../compontents/spinner/Spinner";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {Link} from "react-router-dom";
+import {useRoster} from "../../../hooks/useRoster";
 
 
-import {Col, Container, Row} from 'react-bootstrap'
+import {Col, Row} from 'react-bootstrap'
 
 const RosterList = () => {
 
-    const {setSnackBar} = useSnackBar();
-
+    const {deleteRoster} = useRoster();
     const session_id = localStorage.getItem('session_id');
-
     const {user} = useAppSelector(state => state.auth);
-
 
     const {data} = useGetListRosterQuery({
         params: {
@@ -26,23 +24,6 @@ const RosterList = () => {
             account_id: user.id
         }
     });
-
-    const [deleteRoster] = useDeleteRosterMutation();
-
-    const onDeleteRoster = async (id: number) => {
-       try {
-           await deleteRoster({
-               params:{
-                   list_id: id,
-                   session_id: session_id
-               }
-           });
-           setSnackBar('you have successfully added the movie to the list!', 'success');
-       }catch (err:any) {
-           setSnackBar(err?.status_message, 'error')
-       }
-
-    };
 
     const list = data?.results.map((item) => {
         return (
@@ -56,7 +37,7 @@ const RosterList = () => {
                        <div className={styles.count}>
                            <div> {item.item_count}</div>
                        </div>
-                       <div onClick={() => onDeleteRoster(item.id)}
+                       <div onClick={() => deleteRoster(item.id)}
                             className={styles.remove}>
                            <DeleteIcon/>
                        </div>
@@ -65,8 +46,6 @@ const RosterList = () => {
             </Col>
         )
     });
-
-    console.log(data);
     return (
         <Row className={styles.root}>
             {data ? list : <SpinnerBlock/>}

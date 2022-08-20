@@ -5,7 +5,7 @@ import {Col, Container, Row} from "react-bootstrap"
 import NotAuth from "../../compontents/notAuth/NotAuth";
 import styles from './pagelists.module.scss'
 import {Link} from "react-router-dom";
-import RosterList from "../../containers/rosterList/RosterList";
+import RosterList from "../../containers/roster/rosterList/RosterList";
 import ListIcon from '@mui/icons-material/List';
 
 

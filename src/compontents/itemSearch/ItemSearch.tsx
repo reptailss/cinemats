@@ -20,7 +20,7 @@ import sliceString from '../../utils/sliceString'
 
 import styles from './itemSearch.module.scss';
 import StateMovieSidebar from "../../containers/stateMovieSidebar/StateMovieSidebar";
-import AddNewMovieRosterBtn from "../../containers/addNewMovieRosterBtn/addNewMovieRosterBtn";
+import AddNewMovieRosterBtn from "../../containers/roster/addNewMovieRosterBtn/addNewMovieRosterBtn";
 
 interface ItemSearchProps extends IMovie {
     lenghtOverview: number

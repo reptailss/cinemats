@@ -10,10 +10,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import {Col, Container, Row} from 'react-bootstrap'
-import AddRoster from "../../containers/addRoster/AddRoster";
+import AddRoster from "../../containers/roster/addRoster/AddRoster";
 
 import styles from './pagenewroster.module.scss'
-import AddMovieRoster from "../../containers/addMovieRoster/addMovieRoster";
+import AddMovieRoster from "../../containers/roster/addMovieRoster/addMovieRoster";
 import {useAppSelector} from "../../hooks/hook";
 
 
